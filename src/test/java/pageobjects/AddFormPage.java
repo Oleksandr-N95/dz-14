@@ -2,6 +2,7 @@ package pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AddFormPage extends AbstractPageObject{
 
@@ -18,6 +19,14 @@ public class AddFormPage extends AbstractPageObject{
     public AddFormPage(WebDriver driver) {
         super(driver);
         driver.get("https://demoqa.com/webtables");
+    }
+
+    public WebElement userRecord(String username) {
+        return getElement(userRecordXpath(username));
+    }
+
+    private By userRecordXpath(String username) {
+        return By.xpath(String.format("//div[@class='rt-table']//div[text()]", username));
     }
 
     public AddFormPage addForm(String firstName, String lastName, String email, int age, int salary, String department) {

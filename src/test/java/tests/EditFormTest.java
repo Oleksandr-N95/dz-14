@@ -12,9 +12,9 @@ public class EditFormTest extends BaseTest{
 
     @Test
     public void editFormTest(){
-        new EditFormPage(driver)
-                .editForm(AGE, SALARY, DEPARTMENT);
-        Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/webtables", "The form wasn't edited");
+        EditFormPage editFormPage = new EditFormPage(driver);
+                editFormPage.editForm(AGE, SALARY, DEPARTMENT);
+        Assert.assertTrue(editFormPage.editRecord(DEPARTMENT).isDisplayed(), "The form wasn't edited");
     }
 
 

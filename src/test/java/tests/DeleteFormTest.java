@@ -3,13 +3,15 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageobjects.DeleteFormPage;
+import pageobjects.EditFormPage;
 
 public class DeleteFormTest extends BaseTest{
+    private final static String LASTNAME = "Vega";
 
     @Test
     public void deleteFormTest(){
-        new DeleteFormPage(driver)
+        DeleteFormPage deleteFormPage = new DeleteFormPage(driver)
                 .deleteForm();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/webtables", "The form wasn't deleted");
+        Assert.assertTrue(deleteFormPage.deleteRecord(LASTNAME).isEnabled(), "The form wasn't edited");
     }
 }

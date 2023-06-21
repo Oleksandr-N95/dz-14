@@ -2,6 +2,7 @@ package pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class EditFormPage extends AbstractPageObject{
 
@@ -14,6 +15,14 @@ public class EditFormPage extends AbstractPageObject{
     public EditFormPage(WebDriver driver) {
         super(driver);
         driver.get("https://demoqa.com/webtables");
+    }
+
+    public WebElement editRecord(String department) {
+        return getElement(editRecordXpath(department));
+    }
+
+    private By editRecordXpath(String department) {
+        return By.xpath(String.format("(//div[@class='rt-table']//div[text()])[6]", department));
     }
 
     public EditFormPage editForm(int age, int salary, String department) {
