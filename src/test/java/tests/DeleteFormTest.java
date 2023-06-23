@@ -1,17 +1,17 @@
 package tests;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.DeleteFormPage;
-import pageobjects.EditFormPage;
+import pageobjects.FormPage;
 
 public class DeleteFormTest extends BaseTest{
     private final static String LASTNAME = "Vega";
 
     @Test
     public void deleteFormTest(){
-        DeleteFormPage deleteFormPage = new DeleteFormPage(driver)
+        FormPage deleteFormPage = new FormPage(driver)
                 .deleteForm();
-        Assert.assertTrue(deleteFormPage.deleteRecord(LASTNAME).isEnabled(), "The form wasn't edited");
+        Assert.assertFalse(deleteFormPage.isElementPresent(By.id(LASTNAME)), "The form wasn't deleted");
     }
 }

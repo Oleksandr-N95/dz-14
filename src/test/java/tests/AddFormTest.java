@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.AddFormPage;
+import pageobjects.FormPage;
 
 public class AddFormTest extends BaseTest{
     private final static String NAME = "Ben";
@@ -15,14 +15,8 @@ public class AddFormTest extends BaseTest{
 
     @Test
     public void addFormTest() {
-        AddFormPage addFormPage = new AddFormPage(driver);
+        FormPage addFormPage = new FormPage(driver);
         addFormPage.addForm(NAME, LASTNAME, EMAIL, AGE, SALARY, DEPARTMENT);
         Assert.assertTrue(addFormPage.userRecord(NAME).isDisplayed(), "The record was not created");
     }
-
-
-
-
-
-
 }

@@ -2,8 +2,7 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.AddFormPage;
-import pageobjects.EditFormPage;
+import pageobjects.FormPage;
 
 public class EditFormTest extends BaseTest{
     private final static int AGE = 25;
@@ -12,9 +11,9 @@ public class EditFormTest extends BaseTest{
 
     @Test
     public void editFormTest(){
-        EditFormPage editFormPage = new EditFormPage(driver);
-                editFormPage.editForm(AGE, SALARY, DEPARTMENT);
-        Assert.assertTrue(editFormPage.editRecord(DEPARTMENT).isDisplayed(), "The form wasn't edited");
+        FormPage FormPage = new FormPage(driver);
+                FormPage.editForm(AGE, SALARY, DEPARTMENT);
+        Assert.assertTrue(FormPage.editRecord(DEPARTMENT).isDisplayed(), "The form wasn't edited");
     }
 
 

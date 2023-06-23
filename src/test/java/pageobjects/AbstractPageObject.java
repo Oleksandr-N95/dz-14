@@ -63,4 +63,11 @@ public class AbstractPageObject {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click()", getElement(by));
     }
+    public boolean isElementPresent(By by) {
+        try {
+            return driver.findElement(by).isEnabled();
+        } catch (Exception exception) {
+            return false;
+        }
+    }
 }

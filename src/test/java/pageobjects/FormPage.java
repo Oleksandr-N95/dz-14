@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AddFormPage extends AbstractPageObject{
+public class FormPage extends AbstractPageObject {
 
     private final By addButtonField = By.cssSelector("#addNewRecordButton");
     private final By firstNameField = By.cssSelector("#firstName");
@@ -14,9 +14,11 @@ public class AddFormPage extends AbstractPageObject{
     private final By salaryField = By.cssSelector("#salary");
     private final By departmentField = By.cssSelector("#department");
     private final By submitButtonField = By.cssSelector("#submit");
+    private final By deleteButtonField = By.cssSelector("#delete-record-1");
+    private final By editButtonField = By.cssSelector("#edit-record-1");
 
 
-    public AddFormPage(WebDriver driver) {
+    public FormPage(WebDriver driver) {
         super(driver);
         driver.get("https://demoqa.com/webtables");
     }
@@ -25,11 +27,19 @@ public class AddFormPage extends AbstractPageObject{
         return getElement(userRecordXpath(username));
     }
 
+    public WebElement editRecord(String department) {
+        return getElement(editRecordXpath(department));
+    }
+
+    private By editRecordXpath(String department) {
+        return By.xpath(String.format("(//div[@class='rt-table']//div[text()])[6]", department));
+    }
+
     private By userRecordXpath(String username) {
         return By.xpath(String.format("//div[@class='rt-table']//div[text()]", username));
     }
 
-    public AddFormPage addForm(String firstName, String lastName, String email, int age, int salary, String department) {
+    public FormPage addForm(String firstName, String lastName, String email, int age, int salary, String department) {
         clickOnElement(addButtonField);
         getElement(firstNameField).sendKeys(firstName);
         getElement(lastNameField).sendKeys(lastName);
@@ -38,8 +48,18 @@ public class AddFormPage extends AbstractPageObject{
         getElement(salaryField).sendKeys(String.valueOf(salary));
         getElement(departmentField).sendKeys(department);
         clickOnElement(submitButtonField);
-        return new AddFormPage(driver);
+        return new FormPage(driver);
     }
-
-
+    public FormPage editForm(int age, int salary, String department) {
+        clickOnElement(editButtonField);
+        getElement(ageField).sendKeys(String.valueOf(age));
+        getElement(salaryField).sendKeys(String.valueOf(salary));
+        getElement(departmentField).sendKeys(department);
+        clickOnElement(submitButtonField);
+        return new FormPage(driver);
+    }
+    public FormPage deleteForm() {
+        clickOnElement(deleteButtonField);
+        return new FormPage(driver);
+    }
 }
